@@ -1,20 +1,23 @@
-// Define the OpenWeatherMap API key and URL
-const apiKey = "e7030ed9ba490a0b1e9e61cc8434c0cf"; // Your actual API key
+const apiKey = "1865975581d164ee2b9323552a1a63bc"; // API key
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
 const forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
 
 // Function to fetch weather data based on city name
 async function getWeather(city) {
-    const weatherResponse = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric`);
-    const weatherData = await weatherResponse.json();
+    try {
+        const weatherResponse = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric`);
+        
+        // Check if the city is valid
+        if (!weatherResponse.ok) {
+            throw new Error('City not found');
+        }
 
-    if (weatherData.cod === "404") {
-        alert("City not found");
-        return;
+        const weatherData = await weatherResponse.json();
+        displayWeather(weatherData);
+        getForecast(city);
+    } catch (error) {
+        alert(error.message);  // Display an alert if an error occurs
     }
-
-    displayWeather(weatherData);
-    getForecast(city);
 }
 
 // Function to display the current weather data
@@ -28,30 +31,40 @@ function displayWeather(data) {
 
 // Function to fetch and display the 5-day weather forecast
 async function getForecast(city) {
-    const forecastResponse = await fetch(`${forecastUrl}?q=${city}&appid=${apiKey}&units=metric`);
-    const forecastData = await forecastResponse.json();
+    try {
+        const forecastResponse = await fetch(`${forecastUrl}?q=${city}&appid=${apiKey}&units=metric`);
+        
+        if (!forecastResponse.ok) {
+            throw new Error('Forecast data not found');
+        }
 
-    const forecastContainer = document.getElementById("forecast-container");
-    forecastContainer.innerHTML = "";
+        const forecastData = await forecastResponse.json();
+        const forecastContainer = document.getElementById("forecast-container");
+        forecastContainer.innerHTML = "";
 
-    // Display 5-day forecast (every 24 hours)
-    for (let i = 0; i < forecastData.list.length; i += 8) {
-        const forecast = forecastData.list[i];
-        const forecastItem = document.createElement("div");
-        forecastItem.classList.add("forecast-item");
-        forecastItem.innerHTML = `
-            <p>${new Date(forecast.dt_txt).toLocaleDateString()}</p>
-            <p>${Math.round(forecast.main.temp)}°C</p>
-            <p>${forecast.weather[0].main}</p>
-        `;
-        forecastContainer.appendChild(forecastItem);
+        // Display 5-day forecast (every 8th entry is a new day)
+        for (let i = 0; i < forecastData.list.length; i += 8) {
+            const forecast = forecastData.list[i];
+            const forecastItem = document.createElement("div");
+            forecastItem.classList.add("forecast-item");
+            forecastItem.innerHTML = `
+                <p>${new Date(forecast.dt_txt).toLocaleDateString()}</p>
+                <p>${Math.round(forecast.main.temp)}°C</p>
+                <p>${forecast.weather[0].main}</p>
+            `;
+            forecastContainer.appendChild(forecastItem);
+        }
+    } catch (error) {
+        console.error(error.message);  // Log any forecast-related errors
     }
 }
 
 // Add event listener for search button
 document.getElementById("search-button").addEventListener("click", () => {
-    const city = document.getElementById("city-input").value;
+    const city = document.getElementById("city-input").value.trim();
     if (city) {
         getWeather(city);
+    } else {
+        alert("Please enter a city name");
     }
 });

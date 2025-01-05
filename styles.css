@@ -5,25 +5,34 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: #333;
 }
 
 .weather-app {
     text-align: center;
     background-color: #fff;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     width: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.weather-app:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 h1 {
-    color: #333;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    font-size: 2rem;
 }
 
 .search {
@@ -31,22 +40,32 @@ h1 {
 }
 
 #city-input {
-    padding: 10px;
+    padding: 12px;
     width: 80%;
-    margin-right: 10px;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+}
+
+#city-input:focus {
+    border-color: #4CAF50;
 }
 
 button {
-    padding: 10px;
+    padding: 12px 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    cursor: pointer;
+    border-radius: 25px;
     font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
 }
 
-.unit-toggle {
-    margin-top: 10px;
+button:hover {
+    background-color: #45a049;
 }
 
 .weather-info {
@@ -54,20 +73,60 @@ button {
 }
 
 #weather-icon {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
+    margin-top: 15px;
+}
+
+.weather-info p {
+    font-size: 1.1rem;
+    margin: 10px 0;
 }
 
 .forecast {
     margin-top: 30px;
 }
 
+.forecast h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
 .forecast .forecast-item {
     display: inline-block;
     width: 70px;
-    margin: 10px;
+    margin: 15px;
     padding: 15px;
     background-color: #f4f4f4;
-    border-radius: 5px;
+    border-radius: 10px;
     text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.forecast .forecast-item:hover {
+    background-color: #4CAF50;
+    color: white;
+    transform: scale(1.05);
+}
+
+.forecast .forecast-item p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+@media (max-width: 600px) {
+    .weather-app {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .forecast .forecast-item {
+        width: 50px;
+    }
 }

@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.weather-app {
+    text-align: center;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h1 {
+    color: #333;
+}
+
+.search {
+    margin-bottom: 20px;
+}
+
+#city-input {
+    padding: 10px;
+    width: 80%;
+    margin-right: 10px;
+}
+
+#search-button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.weather-info {
+    margin-top: 20px;
+}
+
+.forecast {
+    margin-top: 30px;
+}
+
+.forecast .forecast-item {
+    display: inline-block;
+    width: 70px;
+    margin: 10px;
+    padding: 15px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    text-align: center;
+}

@@ -36,7 +36,7 @@ h1 {
     margin-right: 10px;
 }
 
-#search-button {
+button {
     padding: 10px;
     background-color: #4CAF50;
     color: white;
@@ -45,8 +45,17 @@ h1 {
     font-size: 16px;
 }
 
+.unit-toggle {
+    margin-top: 10px;
+}
+
 .weather-info {
     margin-top: 20px;
+}
+
+#weather-icon {
+    width: 50px;
+    height: 50px;
 }
 
 .forecast {

@@ -1,5 +1,5 @@
 // Define the OpenWeatherMap API key and URL
-const apiKey = "YOUR_API_KEY_HERE"; // Replace with your API key
+const apiKey = "1865975581d164ee2b9323552a1a63bc"; // Your actual API key
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
 const forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
 
@@ -55,5 +55,3 @@ document.getElementById("search-button").addEventListener("click", () => {
         getWeather(city);
     }
 });
-
-// Optional: You can add more event listeners here for other features like temperature unit switch
